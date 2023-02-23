@@ -21,8 +21,9 @@ protected:
 
 private:
 
-	GameObject* m_pCube = nullptr;
-
+	std::vector<GameObject*> m_pCubes;
+	GameObject* m_pBall = nullptr;
+	PxRigidDynamic* m_pBallRigid = nullptr;
 
 
 };

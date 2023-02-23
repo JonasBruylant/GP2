@@ -34,10 +34,10 @@ void PhysicsXTestScene::Initialize()
 
 
 	//GROUND PLATE
-	PxRigidStatic* pPlaneActor = pPhysX->createRigidStatic(PxTransform{ PxQuat{PxPiDivTwo, PxVec3{0,0,1}	} });
-	PxRigidActorExt::createExclusiveShape(*pPlaneActor, PxPlaneGeometry{}, *pDefaultMaterial);
-
-	m_pPhysxScene->addActor(*pPlaneActor);
+	//PxRigidStatic* pPlaneActor = pPhysX->createRigidStatic(PxTransform{ PxQuat{PxPiDivTwo, PxVec3{0,0,1}	} });
+	//PxRigidActorExt::createExclusiveShape(*pPlaneActor, PxPlaneGeometry{}, *pDefaultMaterial);
+	//
+	//m_pPhysxScene->addActor(*pPlaneActor);
 	
 
 }
