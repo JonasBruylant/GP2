@@ -38,9 +38,9 @@ void AudioTestScene::Initialize()
 	pInput->AddInputAction({ IncreaseVolume, InputTriggerState::pressed, VK_UP});
 	pInput->AddInputAction({ DecreaseVolume, InputTriggerState::pressed, VK_DOWN});
 
-	const auto pFmod = SoundManager::GetInstance()->GetSystem();
 
 //SOUND 2D
+	const auto pFmod = SoundManager::GetInstance()->GetSystem();
 	FMOD::Sound* pSound2D{ nullptr };
 	FMOD_RESULT result = pFmod->createStream("Resources/Sounds/wave.mp3", FMOD_2D | FMOD_LOOP_NORMAL,nullptr, &pSound2D);
 	SoundManager::GetInstance()->ErrorCheck(result);
@@ -50,7 +50,7 @@ void AudioTestScene::Initialize()
 
 //SOUND 3D
 	FMOD::Sound* pSound3D{ nullptr };
-	FMOD_RESULT result = pFmod->createStream("Resources/Sounds/Thrones.np3", 
+	result = pFmod->createStream("Resources/Sounds/Thrones.np3", 
 		FMOD_3D | FMOD_LOOP_NORMAL | FMOD_3D_LINEARROLLOFF, 
 		nullptr, &pSound3D);
 

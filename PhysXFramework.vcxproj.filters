@@ -190,6 +190,7 @@
     <ClInclude Include="AudioTestScene.h">
       <Filter>GameFiles\Scenes\W02_PhysX</Filter>
     </ClInclude>
+    <ClInclude Include="W2_AssignmentScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -315,5 +316,6 @@
     <ClCompile Include="AudioTestScene.cpp">
       <Filter>GameFiles\Scenes\W02_PhysX</Filter>
     </ClCompile>
+    <ClCompile Include="W2_AssignmentScene.cpp" />
   </ItemGroup>
 </Project>

@@ -31,7 +31,7 @@ void TriggerTestScene::Initialize()
 
 	//Trigger left 
 	m_pTriggerLeft = pPhysX->createRigidStatic(PxTransform{-8.f, .5f, 0.f});
-	auto pShape = PxRigidActorExt::createExclusiveShape(*m_pTriggerLeft, PxBoxGeometry{.5f, 10.f, .5f}, *pDefaultMaterial);
+	auto pShape = PxRigidActorExt::createExclusiveShape(*m_pTriggerLeft, PxBoxGeometry{.5f, 1.f, .5f}, *pDefaultMaterial);
 	
 	pShape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, false);
 	pShape->setFlag(PxShapeFlag::eTRIGGER_SHAPE, true);

@@ -9,8 +9,8 @@
 #define W02
 
 #ifdef W01
-//#include "TestScene.h"
-//#include "PhysicsXTestScene.h"
+#include "TestScene.h"
+#include "PhysicsXTestScene.h"
 #include "W1_AssignmentScene.h"
 #endif
 
@@ -18,6 +18,7 @@
 #include "PhysxMeshScene.h"
 #include "TriggerTestScene.h"
 #include "AudioTestScene.h"
+#include "W2_AssignmentScene.h"
 #endif
 
 namespace dae
@@ -34,7 +35,8 @@ namespace dae
 #ifdef W02
 		//pSceneManager->AddGameScene(new PhysxMeshScene());
 		//pSceneManager->AddGameScene(new TriggerTestScene());
-		pSceneManager->AddGameScene(new AudioTestScene);
+		//pSceneManager->AddGameScene(new AudioTestScene);
+		pSceneManager->AddGameScene(new W2_AssignmentScene());
 #endif
 
 	}

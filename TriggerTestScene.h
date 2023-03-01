@@ -26,5 +26,5 @@ private:
 	PxRigidStatic* m_pTriggerRight = nullptr;
 
 	bool m_IsTriggeredLeft = false;
-	bool m_IsTriggerRight;
+	bool m_IsTriggerRight = false;
 };
