@@ -1,20 +1,19 @@
-[2023-3-1 - 13:49:17:382][DEBUG]   Adapter 0 : NVIDIA GeForce RTX 3060 Laptop GPU
-[2023-3-1 - 13:49:17:384][DEBUG]   Adapter 1 : AMD Radeon(TM) Graphics
-[2023-3-1 - 13:49:17:386][DEBUG]   Adapter 2 : Microsoft Basic Render Driver
-[2023-3-1 - 13:49:17:387][DEBUG]   3 Adapter(s) found
-[2023-3-1 - 13:49:17:388][DEBUG]   InitalizeAdapterAndOutput ok.
-[2023-3-1 - 13:49:17:389][DEBUG]   Window Class Created
-[2023-3-1 - 13:49:17:390][DEBUG]   Desktop resolution: 1707 x 960
-[2023-3-1 - 13:49:17:488][DEBUG]   Window Opened
-[2023-3-1 - 13:49:17:918][DEBUG]   Direct3D Initialized
-[2023-3-1 - 13:49:18:628][DEBUG]   Managers Initialized!
-[2023-3-1 - 13:49:18:630][INFO]    Press 'Page Up' or 'Page Down' to cycle between the different scenes
-[2023-3-1 - 13:49:18:631][INFO]    Press 'I' to toggle the debug renderer.
-[2023-3-1 - 13:49:18:632][INFO]    Press 'M' to do physics stepping.
-[2023-3-1 - 13:49:18:633][INFO]    Press 'L' to stop doing physics stepping.
-[2023-3-1 - 13:49:18:689][DEBUG]   Parsing mesh: Level.obj
-[2023-3-1 - 13:49:18:692][DEBUG]   Scenes Initialized!
-[2023-3-1 - 13:49:18:797][DEBUG]   DebugRenderer::Draw() > Increasing Vertexbuffer Size!
-[2023-3-1 - 13:49:29:383][INFO]    Sphere FOUND triggerbox LEFT
-[2023-3-1 - 13:49:32:897][INFO]    Sphere FOUND triggerbox RIGHT
-[2023-3-1 - 13:49:40:945][DEBUG]   Core Initialization Finished
+[2023-3-3 - 11:27:49:337][DEBUG]   Adapter 0 : NVIDIA GeForce GTX 1070
+[2023-3-3 - 11:27:49:338][DEBUG]   Adapter 1 : Microsoft Basic Render Driver
+[2023-3-3 - 11:27:49:339][DEBUG]   2 Adapter(s) found
+[2023-3-3 - 11:27:49:341][DEBUG]   InitalizeAdapterAndOutput ok.
+[2023-3-3 - 11:27:49:342][DEBUG]   Window Class Created
+[2023-3-3 - 11:27:49:343][DEBUG]   Desktop resolution: 1920 x 1080
+[2023-3-3 - 11:27:49:481][DEBUG]   Window Opened
+[2023-3-3 - 11:27:50:209][DEBUG]   Direct3D Initialized
+[2023-3-3 - 11:27:50:843][DEBUG]   Managers Initialized!
+[2023-3-3 - 11:27:50:845][INFO]    Press 'Page Up' or 'Page Down' to cycle between the different scenes
+[2023-3-3 - 11:27:50:847][INFO]    Press 'I' to toggle the debug renderer.
+[2023-3-3 - 11:27:50:848][INFO]    Press 'M' to do physics stepping.
+[2023-3-3 - 11:27:50:850][INFO]    Press 'L' to stop doing physics stepping.
+[2023-3-3 - 11:27:50:927][DEBUG]   Parsing mesh: Level.obj
+[2023-3-3 - 11:27:50:931][DEBUG]   Scenes Initialized!
+[2023-3-3 - 11:27:51:83][DEBUG]   DebugRenderer::Draw() > Increasing Vertexbuffer Size!
+[2023-3-3 - 11:27:59:797][INFO]    Sphere FOUND triggerbox LEFT
+[2023-3-3 - 11:28:5:437][INFO]    Sphere FOUND triggerbox RIGHT
+[2023-3-3 - 11:28:9:270][DEBUG]   Core Initialization Finished

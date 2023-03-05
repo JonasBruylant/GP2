@@ -18,6 +18,8 @@ enum class InputIds : int
 void W2_AssignmentScene::Initialize()
 {
 	EnablePhysxDebugRendering(true);
+
+
 	const auto pPhysX = PhysxManager::GetInstance()->GetPhysics();
 	const PxMaterial* pSphereMaterial = pPhysX->createMaterial(.5f, .95f, .2f);
 	auto pDefaultMaterial = pPhysX->createMaterial(.5f, .5f, .9f);
@@ -85,9 +87,11 @@ void W2_AssignmentScene::Initialize()
 	PxRigidActorExt::createExclusiveShape(*pCubeActor2, boxGeometry, *pCubeMaterial);
 	m_pCube1->AttachRigidActor(pCubeActor1);
 	m_pCube2->AttachRigidActor(pCubeActor2);
-	pCubeActor1->setMass(.5f);
-	pCubeActor2->setMass(.5f);
+	pCubeActor1->setMass(.1f);
+	pCubeActor2->setMass(.1f);
 
+
+	//Hinges
 	XMFLOAT3 cubeDimension{3.f, 1.f, 3.f};
 	m_pHingeCube1 = new CubePosColorNorm(cubeDimension.x, cubeDimension.y, cubeDimension.z, XMFLOAT4{Colors::Red});
 	m_pHingeCube2 = new CubePosColorNorm(cubeDimension.x, cubeDimension.y, cubeDimension.z, XMFLOAT4{Colors::Blue});
@@ -95,7 +99,9 @@ void W2_AssignmentScene::Initialize()
 	AddGameObject(m_pHingeCube2);
 
 	m_pHingeCube1->Translate(9.f,17.f, 0.f);
+	m_KinematicPositionHinge1 = { m_pHingeCube1->GetPosition().x + cubeDimension.x / 2, 17.f, 0.f};
 	m_pHingeCube2->Translate(-9.f, 17.f, 0.f);
+	m_KinematicPositionHinge2 = {m_pHingeCube2->GetPosition().x - cubeDimension.x/2, 17.f, 0.f};
 
 
 	PxRigidDynamic* pCubeActor3 = pPhysX->createRigidDynamic(PxTransform{ PxIdentity });
@@ -162,18 +168,23 @@ void W2_AssignmentScene::Initialize()
 
 	const auto pFmod = SoundManager::GetInstance()->GetSystem();
 	FMOD::Sound* pSound2D{ nullptr };
-	FMOD_RESULT result = pFmod->createStream("Resources/Sounds/bell.mp3", FMOD_2D, nullptr, &pSound2D);
+	FMOD::Sound* pSound2D2{ nullptr };
+	FMOD_RESULT result = pFmod->createStream("Resources/Sounds/bell.mp3", FMOD_2D , nullptr, &pSound2D);
+	FMOD_RESULT result2 = pFmod->createStream("Resources/Sounds/bell.mp3", FMOD_2D, nullptr, &pSound2D2);
 	SoundManager::GetInstance()->ErrorCheck(result);
+	SoundManager::GetInstance()->ErrorCheck(result2);
 
-	result = pFmod->playSound(pSound2D, nullptr, true, &m_pChannel2D);
+	result = pFmod->playSound(pSound2D, nullptr, true, &m_pChannel2D1);
+	result2 = pFmod->playSound(pSound2D2, nullptr, true, &m_pChannel2D2);
 	SoundManager::GetInstance()->ErrorCheck(result);
+	SoundManager::GetInstance()->ErrorCheck(result2);
 }
 
 void W2_AssignmentScene::Update()
 {
 	const float torqueForce{ 10.f };
 
-	const float movementSpeed{ 10.f * m_SceneContext.GetGameTime()->GetElapsed() };
+	const float movementSpeed{ 20.f * m_SceneContext.GetGameTime()->GetElapsed() };
 
 	if (m_SceneContext.GetInput()->IsKeyboardKey(InputTriggerState::down, VK_RIGHT))
 	{
@@ -188,9 +199,31 @@ void W2_AssignmentScene::Update()
 	{
 		PxVec3 jumpPower{ 0.f, 2000.f, 0.f };
 		m_pBall->GetRigidActor()->is<PxRigidDynamic>()->addForce(jumpPower);
-		//std::cout << "Jumping \n";
 	}
 
+	if (m_isInLeftTrigger)
+	{
+		m_pHingeCube2->GetRigidActor()->setGlobalPose(PxTransform{ m_KinematicPositionHinge2 });
+
+		if (m_RotationalDegreeLeft > -90)
+		{
+			m_RotationalDegreeLeft -= movementSpeed;
+		}
+		m_pHingeCube2->RotateDegrees(0.f, 0.f, m_RotationalDegreeLeft);
+
+	}
+	if (m_isInRightTrigger)
+	{
+		m_pHingeCube1->GetRigidActor()->setGlobalPose(PxTransform{ m_KinematicPositionHinge1 });
+
+
+		if (m_RotationalDegreeRight < 90)
+		{
+			m_RotationalDegreeRight += movementSpeed;
+		}
+		m_pHingeCube1->RotateDegrees(0.f, 0.f, m_RotationalDegreeRight);
+
+	}
 
 }
 
@@ -214,12 +247,14 @@ void W2_AssignmentScene::onTrigger(PxTriggerPair* pairs, PxU32 count)
 			if (pair.status == PxPairFlag::eNOTIFY_TOUCH_FOUND) //ENTER
 			{
 				Logger::GetInstance()->LogInfo(L"Sphere FOUND triggerbox LEFT");
-				bool isPlaying{ false };
-				m_pChannel2D->getPaused(&isPlaying);
-				m_pChannel2D->setPaused(!isPlaying);				
-				m_pHingeCube2->RotateDegrees(0.f, 0.f, 90.f);
-				m_pHingeCube2->Translate(-10.f, 16.f, 0.f);
+				bool isPlaying{ true };
+				m_pChannel2D1->setPaused(isPlaying);				
+				m_pChannel2D1->getPaused(&isPlaying);
+				m_pChannel2D1->setPaused(!isPlaying);				
+				//m_pHingeCube2->RotateDegrees(0.f, 0.f, 90.f);
+				//m_pHingeCube2->Translate(-10.f, 16.f, 0.f);
 
+				m_isInLeftTrigger = true;
 			
 			}
 			else if (pair.status == PxPairFlag::eNOTIFY_TOUCH_LOST) //EXIT
@@ -233,11 +268,15 @@ void W2_AssignmentScene::onTrigger(PxTriggerPair* pairs, PxU32 count)
 			if (pair.status == PxPairFlag::eNOTIFY_TOUCH_FOUND) //ENTER
 			{
 				Logger::GetInstance()->LogInfo(L"Sphere FOUND triggerbox RIGHT");
-				bool isPlaying{ false };
-				m_pChannel2D->getPaused(&isPlaying);
-				m_pChannel2D->setPaused(!isPlaying);
-				m_pHingeCube1->RotateDegrees(0.f, 0.f, 90.f);
-				m_pHingeCube1->Translate(10.f, 16.f, 0.f);
+				bool isPlaying{ true };
+				m_pChannel2D2->setPaused(isPlaying);
+				m_pChannel2D2->getPaused(&isPlaying);
+				m_pChannel2D2->setPaused(!isPlaying);
+				//m_pHingeCube1->RotateDegrees(0.f, 0.f, 90.f);
+				//m_pHingeCube1->Translate(10.f, 16.f, 0.f);
+
+				m_isInRightTrigger = true;
+
 			}
 			else if (pair.status == PxPairFlag::eNOTIFY_TOUCH_LOST) //EXIT
 			{

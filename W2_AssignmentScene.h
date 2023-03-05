@@ -32,6 +32,10 @@ private:
 	GameObject* m_pHingeCube2 = nullptr;
 	GameObject* m_pBall2 = nullptr;
 	GameObject* m_pBall3 = nullptr;
+
+//Position
+	PxVec3 m_KinematicPositionHinge1{};
+	PxVec3 m_KinematicPositionHinge2{};
 	
 
 //Trigger
@@ -39,5 +43,15 @@ private:
 	PxRigidStatic* m_pTriggerRight = nullptr;
 
 //Sounds
-	FMOD::Channel* m_pChannel2D = nullptr;
+	FMOD::Channel* m_pChannel2D1 = nullptr;
+	FMOD::Channel* m_pChannel2D2 = nullptr;
+
+//Bools
+	bool m_isInLeftTrigger;
+	bool m_isInRightTrigger;
+
+//Floats
+	float m_RotationalDegreeRight;
+	float m_RotationalDegreeLeft;
+
 };
